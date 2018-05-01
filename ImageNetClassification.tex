@@ -1,0 +1,26 @@
+\documentclass{article}
+\setlength{\parindent}{2em}
+\title{ImageNet Classification with Deep Convolutional Neural Networks}
+\author{Xuewen Yang}
+\date{May 1.2018}
+\begin{document}
+\maketitle
+Our results on ILSVRC-2010 are summarized in Table 1.
+\begin{table}[!hbp]
+\centering
+\caption{comparison of results on ILSVRC-2010 test set.}
+\begin{tabular}{|c|c|c|}
+\hline
+model&top-1&top-5\\
+\hline
+sparse coding&47.1\%&28.2\%\\
+\hline
+SIFT+FVs&45.7\%&25.7\%\\
+\hline
+CNN&37.5\%&17.0\%\\
+\hline
+\end{tabular}
+\end{table}
+
+ Our network achieves top-1 and top-5 test set error rates of 37.5\% and 17.0\%. The best performance achieved during the ILSVRC-2010 competition was 47.1\% and 28.2\% with an approach that averages the predictions produced from six sparse-coding models trained on different features , and since then the best published results are 45.7\% and 25.7\% with an approach that averages the predictions of two classi-fiers trained on Fisher Vectors (FVs) computed from two types of densely-sampled features.
+\end{document}
