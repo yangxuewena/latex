@@ -1,0 +1,27 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\bibliographystyle{plain}
+\setlength{\parindent}{2em}
+\author{Xuewen Yang}
+\date{May 3. 2018}
+\title{Deep Visual-Semantic Alignments for Generating Image Descriptions}
+\begin{document}
+\maketitle
+In this work, we strive to take a step towards the goal of generating dense descriptions of images such as Fig~\ref{fig:lable}.
+
+\begin{figure}[htbp]
+\small
+\centering
+\includegraphics[width=8cm]{1}
+\caption{Motivation/Concept Figure: Our model treats language as a rich label space and generates descriptions of image regions.}
+\label{fig:lable}
+\end{figure}
+
+The primary challenge towards this goal is in the design of a model that is rich enough to simultaneously reason about contents of images and their representation in the domainof natural language.
+
+Additionally, the model should be free of assumptions about specific hard-coded templates, rules or categories and instead rely on learning from the training data. The second, practical challenge is that data sets of image captions are available in large quantities on the internet\cite{higham2014bibtex}, but these descriptions multiplex mentions of several entities whose locations in the images are unknown.
+
+Our core insight is that we can leverage these large imagesentence data sets by treating the sentences as weak labels,in which contiguous segments of words correspond to some particular, but unknown location in the image. Our approach is to infer these alignments and use them to learn a generative model of descriptions.
+\bibliography{bibfile}
+\end{document}
