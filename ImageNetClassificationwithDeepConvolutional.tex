@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\bibliographystyle{plain}
+\setlength{\parindent}{2em}
+\author{Xuewen Yang}
+\date{May 5. 2018}
+\title{ImageNet Classification with Deep Convolutional Neural Networks}
+\begin{document}
+\maketitle
+The standard way to model a neuron’s output f as a function of its input x is with (\ref{eq1:commutation}) or(\ref{eq2:commutation})
+ \begin{equation}           %给公式自动编号
+f(x)=tanh(x)\label{eq1:commutation}%给公式设置标签
+\end{equation}
+ \begin{equation}           %给公式自动编号
+f(x)=(1+e^{-x})^{-1}\label{eq2:commutation}%给公式设置标签
+\end{equation}
+In terms of training time with gradient descent, these saturating nonlinearities are much slower than the non-saturating nonlinearity$f(x) = max(0; x)$. Following Nair and Hinton ~\cite{Nair2010Rectified}, we refer to neurons with this nonlinearity as Rectified Linear Units (ReLUs). Deep convolutional neural networks with ReLUs train several times faster than their equivalents with tanh units. This is demonstrated in Figure~\ref{fig:label}.
+
+\begin{figure}[htbp]
+\small
+\centering
+\includegraphics[width=8cm]{2}
+\caption{A four-layer convolutional neural network with ReLUs (solid line) reaches a 25\% training error rate on CIFAR-10 six times faster than an equivalent network with tanh neurons}
+\label{fig:label}
+\end{figure}
+ which shows the number of iterations required to reach 25\% training error on the CIFAR-10 dataset for a particular four-layer convolutional network. This plot shows that we would not have been able to experiment with such large neural networks for this work if we had used traditional saturating neuronmodels.
+\bibliography{bibfile1}
+\end{document}
