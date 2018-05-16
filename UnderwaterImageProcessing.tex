@@ -1,0 +1,29 @@
+\documentclass{article}
+\usepackage[top=0.5in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{graphicx}
+\bibliographystyle{plain}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\author{Xuewen Yang}
+\date{may 17. 2018}
+\title{Underwater Image Processing}
+\begin{document}
+\maketitle
+In order to deal with underwater image processing, we have to consider first of all the basic physics of the light propagation in the water medium. Physical properties of the medium cause degradation effects not present in normal images taken in air. Underwater images are essentially characterized by their poor visibility because light is exponentially attenuated as it travels in the water and the scenes result poorly contrasted and hazy. Light attenuation limits the visibility distance at about twenty meters in clear water and five meters or less in turbid water. The light attenuation process is caused by absorption (which removes light energy) and scattering (which changes the direction of light path).
+
+The absorption and scattering processes of the light in water influence the overall performance of underwater imaging systems. Forward scattering (randomly deviated light on its way from an object to the camera) generally leads to blurring of the image features. On the other hand, backward scattering (the fraction of the light reflected by the water towards the camera before it actually reaches the objects in the scene) generally limits the contrast of the images, generating a characteristic veil that superimposes itself on the image and hides the scene. Absorption and scattering effects are due not only to the water itself but also to other components such as dissolved organic matter or small observable floating particles. The presence of the floating particles known as ¡°marine snow¡± (highly variable in kind and concentration) increase absorption and scattering effects.
+
+ The visibility range can be increased with artificial lighting but these sources not only suffer from the difficulties described before (scattering and absorption), but in addition tend to illuminate the scene in a non uniform fashion,producing a bright spot in the center of the image with a poorly illuminated area surrounding it. Finally, as the amount of light is reduced when we go deeper, colors drop off one by one depending on their wavelengths. The blue color travels the longest in the water due to its shortest wavelength,making the underwater images to be dominated essentially by blue color.
+
+ In summary, the images we are interested on can suffer of one or more of the following problems: limited range visibility, low contrast, non uniform lighting, blurring,bright artifacts, color diminished (bluish appearance) and noise. Therefore, application of standard computer vision techniques to underwater imaging requires dealing first with these added problems.The image processing can be addressed from two different points of view: as an image restoration technique or as an image enhancement method:
+\begin{itemize}
+\item[1)]
+The image restoration aims to recover a degraded image using a model of the degradation and of the original image formation; it is essentially an inverse
+problem. These methods are rigorous but they require many model parameters (like attenuation and diffusion coefficients that characterize the water turbidity) which are only scarcely known in tables and can be extremely variable. Another important parameter required is the depth estimation of a given object in the scene.
+\item[2)]
+Image enhancement uses qualitative subjective criteria to produce a more visually pleasing image and they do not rely on any physical model for the image
+formation. These kinds of approaches are usually simpler and faster than deconvolution methods.\cite{Schettini2010Underwater}
+\end{itemize}
+
+\bibliography{test4}
+\end{document}
