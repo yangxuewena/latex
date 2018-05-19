@@ -1,0 +1,38 @@
+\documentclass[twocolumn]{article}
+\setlength\columnsep{20pt}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{graphicx}
+\bibliographystyle{plain}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\author{Xuewen Yang}
+\date{May 19. 2018}
+\title{Propagation of Light in the Water}
+\begin{document}
+\maketitle
+In this section we focus on the special transmission properties of the light in the water. Light interacts with the water medium through two processes: absorption and scattering.Absorption is the loss of power as light travels in the medium and it depends on the index of refraction of the medium.Scattering refers to any deflection from a straight-line propagation path. In underwater environment, deflections can be due to particles of size comparable to the wavelengths of travelling light (diffraction), or to particulate matter with refraction index different from that of the water (refraction).According to the Lambert-Beer empirical law, the decay of light intensity is related to the properties of the material (through which the light is travelling) via an exponential
+dependence. The irradiance E at position r can be modeled as:
+\begin{equation}           %给公式自动编号
+E(r)=E(0)e^{-cr}\label{eq:commutation}%给公式设置标签
+\end{equation}
+where c is the total attenuation coefficient of the medium.This coefficient is a measure of the light loss from the combined effects of scattering and absorption over a unit length of travel in an attenuation medium. Typical attenuation coefficients for deep ocean water, coastal water and bay water
+are 0.05m?1, 0.2m?1, and 0.33m?1, respectively.
+
+Assuming an isotropic, homogeneous medium, the total attenuation coefficient c can be further decomposed as a sum of two quantities a and b, the absorption and scattering coefficients of the medium, respectively:
+\begin{equation}           %给公式自动编号
+E(r)=E(0)e^{-ar}e^{-br}\label{eq:commutation}%给公式设置标签
+\end{equation}
+McGlamery\cite{Mcglamery1980A} laid out the theoretical foundations of the optical image formation model while Jaffe\cite{Jaffe1990Computer} extended the model and applied it to design different subsea image acquisition systems. Modeling of underwater imaging has also been carried out by Monte Carlo techniques.\cite{Funk1972Handbook}
+
+In this section we follow the image formation model of Jaffe-McGlamery. According to this model, the underwater image can be represented as the linear superposition of three components (see Figure \ref{fig:1}). An underwater image experiment consists of tracing the progression of light from a light source to a camera. The light received by the camera is composed by three components: (i) the direct component Ed (light reflected directly by the object that has not been scattered in the water), (ii) the forward-scattered component Ef (light reflected by the object that has been scattered at a small angle) and (iii) the backscatter component Eb (light reflected by objects not on the target scene but that enters the camera, for example due to floating particles). Therefore,the total irradiance ET reads:
+\begin{equation}           %给公式自动编号
+E_t=E_d+E_f+E_b\label{eq:commutation}%给公式设置标签
+\end{equation}
+\begin{figure}[htbp]
+\centering
+\includegraphics{test5}
+\caption{The three components of underwater optical imaging:direct component (straight line), forward component (dashed line)and backward scatter component (dash-dot line).}
+\label{fig:1}
+\end{figure}
+\bibliography{test5}
+\end{document}
