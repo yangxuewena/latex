@@ -1,0 +1,31 @@
+\documentclass{article}
+\setlength\columnsep{20pt}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\bibliographystyle{plain}
+\setlength{\parindent}{2em}
+\author{Xuewen Yang}
+\date{May 21, 2018}
+\title{Image Restoration}
+\begin{document}
+\maketitle
+this section tells us some image restoration methods.Image restoration aims at recovering the original image f(x,y) from the observed image g(x,y)using explicit knowledge about the degradation function h(x,y)and the noise characteristics n(x,y):
+\begin{equation}
+g(x,y)=f(x,y)*h(x,y)+n(x,y)\label{eq:commutation}
+\end{equation}
+
+where * denotes convolution.the degradation function h(x,y)includes the system response from the imaging system itself and the effects of the medium.The better the knowledge we have about the degradation function, the better are the results of the restoration. However,in practical cases, there is insufficient knowledge about the degradation and it must be estimated and modeled. In our case, the source of degradation in underwater imaging includes turbidity, floating particles and the optical properties of light propagation in water. Therefore, underwater optical properties have to be incorporated into the PSF and MTF. The presence of noise from various sources further complicates these techniques.
+
+The image restoration also make a great progress, Hou et al\cite{Hou2008Automated} incorporated the underwater optical properities to traditional image restoration approach,they incorporated measured in-water optical properties to the point spread function in the spatial domain and the modulation transfer function in frequency domain; Image restoration is carried out and medium optical properties are estimated. Both modeled and measured optical properties are taken into account in the framework. The images are restored using PSFs derived from both the modeled and measured optical properties (see as the figure~\ref{fig:1} ).
+\begin{figure}[htbp]
+\centering
+\includegraphics{test8}
+\caption{Image taken at 7.5m depth in Florida. The original (a), the restored image based on measured MTF (b) and the restored image based on modeled MTF (c). Courtesy of Hou et al.}
+\label{fig:1}
+\end{figure}
+
+Trucco and Olmos \cite{Trucco2006Self}presented a self-tuning restoration filter based on a simplified version of the Jaffe-McGlamery image formation model,Two assumptions are
+made in order to design the restoration filter. The first one assumes uniform illumination (direct sunlight in shallow waters) and the second one is to consider only the forward component of the image model as the major degradation source, ignoring back scattering and the direct component.
+\bibliography{test8}
+\end{document}
