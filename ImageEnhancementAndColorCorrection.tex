@@ -1,0 +1,33 @@
+\documentclass[twocolumn]{article}
+\setlength\columnsep{20pt}
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\bibliographystyle{unsrt}
+\setlength{\parindent}{2em}
+\author{Xuewen Yang}
+\date{May 23, 2018}
+\title{Image Enhancement And Color Correction}
+\begin{document}
+\maketitle
+\large This section introducts some methods of image enhancement and color correction,these methods make total abstraction of the image formation process, and no a priori knowledge of the environment is needed (do not use attenuation and scattering coefficients for instance).
+
+Regarding color correction, as depth increases, colors drop off one by one depending on their wavelength. First of all, red color disappears at the depth of 3m approximately. At the depth of 5m, the orange color is lost. Most of the yellow goes off at the depth of 10m and finally the green and purple disappear at further depth. The blue color travels the longest in the water due to its shortest wavelength. The underwater images are therefore dominated by blue-green color. Also the light source variations will affect the color perception.As a consequence, a strong and non uniform color cast will characterize the typical underwater images.
+
+Bazeille et al. \cite{Bazeille2006Automatic} propose an algorithm to preprocess underwater images. It reduces underwater perturbations and improves image quality. It is composed of several successive independent processing steps which correct non uniform illumination (homorphic filtering), suppress noise (wavelet denoising), enhance edges (anisotropic filtering) and adjust colors (equalizing RGB channels to suppress predominant color). The algorithm is automatic and requires no parameter adjustment. The method was used as a preliminary step of edge detection. The robustness of the method was analyzed using gradient magnitude histograms and also the criterion used by Arnold-Bos et al. \cite{Arnold2010A} was applied. This criterion assumes that a well-contrasted and noise-free image has a distribution of the gradient magnitude histogram close to exponential and it attributes a mark from zero to one. In Figure \ref{fig:1} pairs of images are shown before and after Bazeille et al¡¯. processing.
+
+\begin{figure}[!htbp]
+\centering
+\includegraphics{color1}
+\caption{Pairs of images before (a) and after (b) Bazeille et al.¡¯ processing. Image courtesy of Bazeille et al}
+\label{fig:1}
+\end{figure}
+Chambah et al. \cite{Chambah2003Underwater} proposed a color correction method based on ACE model, an unsupervised color equalization algorithm developed by Rizzi et al. ACE is a perceptual approach inspired by some adaptation mechanisms of the human vision system, in particular lightness constancy and color constancy. ACE was applied on videos taken in aquatic environment that present a strong and non uniform color cast due to the depth of the water and the artificial illumination. Images were taken from the tanks of an aquarium. Inner parameters of the ACE algorithm were properly tuned to meet the requirements of image and histogram shape naturalness and to deal with these kinds of aquatic images. In Figure \ref{fig:2} two example original images and their restored ACE version are shown.
+\begin{figure}[!htbp]
+\centering
+\includegraphics{color2}
+\caption{Original images (a), after correction with ACE (b). Image courtesy of Chambah et al.}
+\label{fig:2}
+\end{figure}
+\bibliography{test8}
+\end{document}
