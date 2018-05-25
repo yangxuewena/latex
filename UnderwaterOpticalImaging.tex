@@ -1,31 +1,107 @@
-\documentclass[twocolumn]{article}
+\documentclass[10pt,twocolumn,letterpaper]{article}
 \setlength\columnsep{20pt}
-\usepackage{ctex}
-\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}%Ò³±ß¾à
+\usepackage[top=1in,bottom=1in,left=1in,right=1in]{geometry}
 \usepackage{graphicx}
 \usepackage{indentfirst}
-\setlength{\parindent}{2em}
 \bibliographystyle{plain}
-\title{Underwater Optical Imaging}
+\setlength{\parindent}{2em}
 \author{Xuewen Yang}
-\date{May 9. 2018}
+\date{May 25, 2018}
+\title{Underwater Optical Imaging: The Past, the Present,and the Prospects}
 \begin{document}
 \maketitle
-It is not entirely clear when life originated approximately 3.5¨C4 billion years ago, whether it was in the surface of the oceans, hot springs on land, or in the deeper sea. However, what is clear is that the ability to harvest the energy of the sun quickly became the preferred way to survive and proliferate in a nutrient rich world, where the basic building blocks of life could be found and employed for reproduction. In addition, as some of these primordial organisms evolved, their ability increased so that they not only could use the light energy to create carbon-based, macromolecules but also to sense the environment.
+\large
+\section{Light And The Underwater Environment}
+\subsection{Light Propagation in 3-D}
+Modern physics characterizes light as both a wave that can be subject to diffraction and coherent superposition as well as a particle; a photon, as evidenced by the photoelectric effect, is packaged in a quantum.The propagation of light follows from a solution of the wave equation as unified by Maxwell in the 1860s.To fully describe the 3-D light field in aqueous media, it is necessary to characterize both directionality and intensity at every location.
+\subsection{Transmission of Light and the Physical Properties of the Environment}
+It is important to consider the transformations the light incurs as it propagates through the medium.In a real ocean or lake, filled with myriad particles and
+properties, so light can be absorbed, refracted, reflected, scattered and depolarized among other phenomena. the most commonly referenced are the attenuation and scattering of light in the more optically transparent window of the electromagnetic spectrum of 400¨C700 nm.Total light attenuation per meter consists of
+both the absorption and scatter that a photon may suffer when propagating from location to as described by the simple exponential law:
+\begin{equation}
+I(r)=I(r_0)e^{c(r-r_0)}=I(r_0)e^{-(a+b)(r-r_0)}\label{eq:commutation}
+\end{equation}
+\section{A Historical Recap Of Underwater Optical Image}
+\subsection{Animal Recap Of Underwater Optical Imaging}
+Animal vision systems provide a fascinating glimpse into some of the possibilities of underwater imaging.This section discussed some special cases where unique and very interesting adaptations have occurred that meet the challenge of seeing underwater.This includes the use of multiple wavelengths, polarization, and low-light level sensitivity. We also note that to evade predators, a variety of strategies such as transparency and camouflage have been implemented to remain
+¡°cryptic¡±\cite{Johnsen2000Transparent} so that the organisms are difficult to visually detect.In the case of biological imagers, for the most part, the imager is not illuminating the object of interest, so passive imaging is the main option.Animal underwater vision systems can be characterized in the same way as any imaging system, the most important features being sensitivity, resolution, and contrast. Other interesting features are spectral bandwidth, and the ability to sense polarization.
+\subsection{Early Imagers}
+Fascination with underwater imaging was clearly present in the middle ages.In the 19th century,there was great fascination in exploring the ocean, somewhat
+akin to our 20th century fascination with space.Two interesting examples were the German built submersible ¡°Sea Devil,¡± built in 1856, and the Ictineo I and II,
+designed and built by the Catalan designer Narcis Monturial in 1861 and 1864.The Sea Devil is credited with taking the first underwater picture, a foggy image of some rocks. Figure~\ref{fig:1} shows a replication of the Ictineo (length equal to 7 m).The next great advance in underwater imaging accompanied the advent of diving suits.One of the earliest pictures, although
+there seems to be some debate\cite{Watson2013Subsea}, was taken by Louis Boutan
+who took pictures of either himself or a fellow diver in 1893 at
+the French Mediterranean coast at a depth of more than 50 m.
+Fig. 8 shows the setup, camera, and one of the pictures taken As reported, the development of arc lamps and then a magnesium powder flash facilitated shorter exposures and allowed Boutan to not have to stand still for 30 min underwater.
+\begin{figure*}[t]
+\centering
+\includegraphics{p1}
+\caption{Photograph of the replication of the Ictineo I, located at the Marine Museum in Barcelona.}
+\label{fig:l}
+\end{figure*}
+\subsection{Imaging With Film}
+Two major advances in the 20th century facilitated the proliferation
+of underwater imaging:
 
-Evidence that this is true comes from a retrospective examination of the down welling spectra of water\cite{Land2011Marine} , depicted in Figure~\ref{fig:1}, when compared to the sensitivity of the vertebrate eye as in Figure~\ref{fig:2}.
-\begin{figure}[htbp]
+1) the development of the film
+camera, starting in the 1890s with George Eastman;
+
+2) the development of the Aqua-Lung in the 1940s by Cousteau and Gagnan.
+
+The first underwater color pictures were reported to
+have been taken in 1926¨C1927 by William Longley and Charles
+Martin off the Florida Keys.
+
+Bruce Mozert developed still and video
+housings and underwater flash systems in the 1930s. Haas developed
+the popular ¡®Rolleimarin¡¯ camera in 1943; and in 1957
+Cousteau conceived the Calypso camera that in 1961 went on to
+become the best known underwater camera of the 20th century
+as the ¡®Nikonos¡¯.
+\subsection{Modern Age for Underwater Optical Imaging: Electronic Imaging}
+An area that was still badly in need
+of technical advance was the capability to view underwater
+images, taken from a remote platform, from a surface vessel.
+To achieve this goal, Ballard's group at WHOI developed
+the ARGO system\cite{Harris1986ARGO},a substantial advance for
+deep-sea underwater imaging.Subsequent developments in underwater optical imaging progressed
+as the revolution in digital recording, transmission, and
+data processing continued.
+\section{Underwater Systems: Principle And Design}
+As a general classification, considered above, underwater
+imaging systems can be regarded as either ¡°passive¡± or ¡°active,¡±
+the difference being whether the imager creates the light
+(active) or not (passive). Although these two systems are different,
+the properties of the light field and how it is transformed
+during propagation unifies them and, moreover, provides a
+common context for understanding underwater optical imaging.
+\subsection{Passive Optical Imaging}
+The first case of obtaining a quantitative estimate for
+the clarity of imaging underwater was obtained from the measurement
+of the visibility of the Secchi disk. Created by Angelo
+Secchi in 1865, the disk consists of the black and white pattern,
+shown in Fig~\ref{fig:2}, printed on a circular disk. The distance
+where the disk vanishes, as seen by a human observer, is taken
+as the measure of the water's transparency and referred to as
+the Secchi depth.A pragmatic solution to predict underwater radiance is the
+Hydrolight Model. The model uses the invariant embedding
+technique and can accommodate depth-varying IOPs
+while providing output such as the radiance and a variety of
+AOPs such as the diffuse attenuation coefficient.Validation has
+occurred in a number of circumstances. The model
+is commercially available (Sequoia Systems, Bellvue WA). As
+configured it does not include polarization.
+\begin{figure}[t]
 \centering
-\includegraphics[width=8cm]{cmp1}
-\caption{(a) Spectra of daily downward irradiance in seawaters at various depths in the ocean over a broad spectral range}
-\label{fig:1}
-\end{figure}
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=8cm]{cmp2}
-\caption{(b) Normalized sensitivity of the photo receptors in the vertebrate eye: black=rods; blue, green, red=cones}
+\includegraphics{p2}
+\caption{Secchi disk pattern.}
 \label{fig:2}
 \end{figure}
- It is clear that the transparency of ocean water provides a ¡°window of opportunity¡± for both harvesting energy and perceiving the world. There is no doubt that it provides the basis for almost all life on Earth.\cite{Jaffe2015Underwater}
-\bibliography{test0}
+\subsection{Active Optical Imaging}
+As defined, the use of artificial illumination for underwater
+viewing is referred to as ¡°active.¡± There is great interest in active
+underwater imaging as an improvement in image quality
+can be obtained when the illumination is controlled and coordinated
+with the receiver.
+\bibliography{prospect}
 \end{document}
