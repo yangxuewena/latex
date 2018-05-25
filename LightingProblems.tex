@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+
+\bibliographystyle{IEEEtran}
+\author{Xuewen Yang}
+\date{May 25. 2018}
+\title{Lighting Problem}
+
+\begin{document}
+\maketitle
+\large
+In this section this paper summarize the articles that have been specifically focused on solving lighting problems.Even if this aspect was already taken into account in some of the methods presented in the previous sections, we review here the works that have addressed in particular this kind of problem, proposing different lighting correction strategies.
+
+Garcia~\emph{et.al.}\cite{Garcia2003On} analyzed how to solve the lighting problems in underwater imaging and reviewed different techniques.The starting point is the illumination-reflectance model,where the image f (x, y) sensed by the camera is considered as a product of the illumination i(x,y),the reflectance function r(x, y) and a gain factor g(x, y) plus an offset term o(x, y):
+\begin{equation}
+f(x,y)=g(x,y)i(x,y)r(x,y)+o(x,y)
+\end{equation}
+
+The multiplicative factor $c_m=g(x,y)i(x,y)$ due to to light sources and camera sensitivity can be modeled as a smooth function (the offset term is ignored).In
+order to model the non-uniform illumination,a Gaussian smoothed version of the image is proposed.The smoothed image is intended to be an estimate of how much the illumination field (and camera sensitivity) affects every pixel.
+
+Some authors compensate for the effects of non-uniform lighting by applying local equalization to the images.The non uniform of lighting demands a special treatment for the different areas of the image, depending on the amount of light they receive. The strategy consists in defining an nxn neighborhood, computing the histogram of this area and applying an equalization function but modifying uniquely the central point of the neighborhood.A similar strategy is used in Zuidervel.
+
+An alternative model consists of applying homomorphic filtering.This approach assumes that the illumination factor varies smoothly through the field of view; generating low frequencies in the Fourier transform of the image (the offset term is ignored).
+\begin{equation}
+lnf(x,y)=lnc_m(x,y)+lnr(x,y)
+\end{equation}
+
+Garcia~\emph{et.al.} tested and compared the different lighting-corrections strategies for two typical underwater situations.The first one considers images acquired in shallow waters at sun down (simulating deep ocean).The vehicle carries its own light producing a bright spot in the center of the image.The second sequence of images was acquired in shallow waters on a sunny day.The evaluation methodology for the comparisons is qualitative.The best results have been obtained by the homomorphic filtering and the point by point correction by the smoothed image.The authors emphasize that both methods consider the illumination field is multiplicative and not subtractive.
+\bibliography{LightingProblems}
+
+\end{document}
