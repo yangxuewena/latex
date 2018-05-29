@@ -1,0 +1,130 @@
+\documentclass[30pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+%\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+%\usepackage{hyperref}\hypersetup{backref,pdfpagemode=FullScreen,colorlinks=true}
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+%\ifcvprfinal\pagestyle{empty}\fi
+
+
+
+\usepackage{graphicx}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+%\bibliographystyle{plain}
+\author{Xuewen Yang}
+\date{May 29. 2018}
+\title{Prospects for Improved Performance}
+\begin{document}
+\maketitle
+\section{Coherent Imaging}
+Among the various techniques for
+imaging through a scattering medium, coherent techniques
+have been shown to offer advantages, especially in biomedical
+imaging where optical coherence tomography (OCT) has become
+a standard method for viewing various classes of objects.
+The central idea with OCT is that signal enhancement will result
+from processing a complex waveform that is propagated into
+the medium and then detected using heterodyne techniques.
+
+In one of the earliest examples of coherent imaging through
+a scattering environment, Stetson \cite{Stetson1967Holographic} imaged a pitcher in a
+small tank filled with water with suspended particles. Although
+no pictures were shown or analyzed quantitatively, the author
+claimed that via simple viewing, the use of coherent methods
+yielded better images than those that did not. In other work, to
+measure the spatial distances over which light can propagate
+and still remain coherent, Stachnik \cite{Stachnik1978The} summarily stated that
+¡°coherent behavior is observable in coastal Atlantic waters at a
+range of 7.84 m (4 attenuation lengths) and that the interference
+patterns that form have good linearity, but can vary significantly
+in contrast.¡±
+\section{Biomedical Perspective}
+The use of optical biomedical imaging is an area
+that has seen tremendous growth in recent decades. Comparing
+the difficulty of imaging through living tissue with that of the
+ocean leads to the conclusion that the underwater imagers are
+quite fortunate, although that is not necessarily their perspective.
+A review paper \cite{Dunsby2003Techniques} presents a wealth of information in
+addition to offering a somewhat different perspective on much
+the same physics. A document that considers the various mathematical
+formulations for diffusion imaging is \cite{Arridge2012Optical}. Diffuse
+imaging plays an important role in the biomedical case because
+the absorption can range between 0.03 and 0.007 1/cm and the
+mean free path for scattering can be on the order of 100 m,
+leading to a ratio of scattering to absorption of at least 2000.
+\section{Advanced Methodologies}
+In this section, a number of
+more advanced technologies are considered to aid in underwater
+imaging. Topics range from the ultimate limitations imposed by
+the physics to the use of more advanced hardware and software
+for processing. A natural question that should be asked by those
+seeking to image underwater is: What is the ultimate limit to
+the process? As considered, the answer to this question can be
+found in considering the contrast transmittance, as given in several
+examples. To date, the standard assumption has been that
+several hundred photons are needed per pixel to form an acceptable
+image.One can compute, via simple analysis, a limit
+to visibility for a scanned system that images one pixel at a time.
+So, given approximately 200 photons of shot noise, the ultimate
+limit would imply an SNR. Since 1 W of
+532-nm green light corresponds to $2.6747\times10^{18}$ photons, the
+equation that governs the SNR for a single pixel, assuming that
+only ballistic photons are used in the image process, is
+\begin{equation}
+200=I\times2.67\times{10^18}\times e^{-2al}\longrightarrow37+ln(I)=2\times al
+\end{equation}
+
+The results contained in Table\ref{tab} indicate that systems, considering
+only absorption-based imaging and assuming 100\% collection
+of the reflected photons, should be able to image at close
+to 12 attenuation lengths. However, since the VSF for underwater
+targets is quite forward pointed, it is not unreasonable
+to assume that some fraction of those photons, especially after
+reflection from the target, will be useful. Since no underwater
+imaging system has achieved the performance as listed in this
+table, it appears as if there is some room for improvement.
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|c|}
+\hline
+Input Power(Watts)&Total No.Atten.Lengths\\
+\hline
+$10^{-6}$ &11.7\\
+\hline
+$10^{-3}$ &15.1\\
+\hline
+1&18.6\\
+\hline
+\end{tabular}\\
+
+\caption{RESULT OF COMPUTING THE NUMBER OF POTENTIALLY ACHIEVABLE ATTENUATION LENGTHS FOR THE ROUND-TRIP IMAGING FROM (5)}
+\label{tab}
+\end{center}
+\end{table}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+%\bibliography{1}
+\end{document}
