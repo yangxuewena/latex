@@ -1,0 +1,121 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+% Include other packages here, before hyperref.
+
+% If you comment hyperref and then uncomment it, you should delete
+% egpaper.aux before re-running latex.  (Or just hit 'q' on the first latex
+% run, let it finish, and you should be clear).
+%\usepackage[pagebackref=true,breaklinks=true,letterpaper=true,colorlinks,bookmarks=false]{hyperref}
+%\usepackage{hyperref}\hypersetup{backref,pdfpagemode=FullScreen,colorlinks=true}
+\cvprfinalcopy % *** Uncomment this line for the final submission
+
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+% Pages are numbered in submission mode, and unnumbered in camera-ready
+%\ifcvprfinal\pagestyle{empty}\fi
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+May 31 2018}
+
+\title{Learning To Align Visual And Language Data}
+\begin{document}
+\maketitle
+
+Our alignment model assumes an input dataset of images
+and their sentence descriptions. Our key insight is that sentences
+written by people make frequent references to some
+particular, but unknown location in the image. For example,
+in Figure~\ref{fig:1},
+
+\begin{figure*}[*htbp]
+\centering
+\includegraphics[width=0.8\linewidth]{1}
+\caption{Overview of our approach. A dataset of images and their sentence descriptions is the input to our model (left).Our model first infers the correspondences (middle) and then learns to generate novel descriptions (right).}
+\label{fig:1}
+\end{figure*}
+
+
+the words ¡°Tabby cat is leaning¡± refer to
+the cat, the words ¡°wooden table¡± refer to the table, etc.
+We would like to infer these latent correspondences, with
+the eventual goal of later learning to generate these snippets
+from image regions. We build on the approach of Karpathy~\emph{et al.}, who learn to ground dependency tree relations
+to image regions with a ranking objective. Our contribution
+is in the use of bidirectional recurrent neural network
+to compute word representations in the sentence, dispensing
+of the need to compute dependency trees and allowing
+unbounded interactions of words and their context in the
+sentence. We also substantially simplify their objective and
+show that both modifications improve ranking performance.
+
+
+
+We first describe neural networks that map words and image
+regions into a common, multimodal embedding. Then we
+introduce our novel objective, which learns the embedding
+representations so that semantically similar concepts across
+the two modalities occupy nearby regions of the space.
+
+
+\section{Representing images}
+Following prior work , we observe that sentence descriptions
+make frequent references to objects and their attributes.
+Thus, we follow the method of Girshick~\emph{et al.}
+to detect objects in every image with a Region Convolutional
+Neural Network (RCNN). The CNN is pre-trained on
+ImageNet\cite{Deng2009ImageNet} and finetuned on the 200 classes of the ImageNet
+Detection Challenge\cite{Russakovsky2014ImageNet}.
+\section{Representing sentences}
+To establish the inter-modal relationships, we would like
+to represent the words in the sentence in the same hdimensional
+embedding space that the image regions occupy.
+The simplest approach might be to project every individual
+word directly into this embedding. However, this
+approach does not consider any ordering and word context
+information in the sentence. An extension to this idea is
+to use word bigrams, or dependency tree relations as previously
+proposed~\cite{Karpathy2014Deep}. However, this still imposes an arbitrary
+maximum size of the context window and requires
+the use of Dependency Tree Parsers that might be trained on
+unrelated text corpora.
+\section{Alignment objective}
+Since the supervision is at the level of
+entire images and sentences, our strategy is to formulate an image-sentence score as a function of the individual region word
+scores. Intuitively, a sentence-image pair should have
+a high matching score if its words have a confident support
+in the image.
+\section{Decoding text segment alignments to images}
+Consider an image from the training set and its corresponding
+sentence. We can interpret the quantity as the unnormalized
+log probability of the word describing any of the bounding boxes in the image. However, since we are
+ultimately interested in generating snippets of text instead
+of single words, we would like to align extended, contiguous
+sequences of words to a single bounding box. Note that
+the solution that assigns each word independently to
+the highest-scoring region is insufficient because it leads to
+words getting scattered inconsistently to different regions.
+To address this issue, we treat the true alignments as latent
+variables in a Markov Random Field (MRF) where the binary
+interactions between neighboring words encourage an alignment to the same region.
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+\end{document}
