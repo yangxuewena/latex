@@ -1,0 +1,111 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+June 4 2018}
+
+\title{Web Scale Photo Hash Clustering on A Single Machine}
+\begin{document}
+\maketitle
+\section{Experiments}
+
+\subsection{Datasets, Features, and Protocols}
+We perform quantitative experiments on the
+ILSVRC2012 dataset, which is a subset of ImageNet~\cite{Deng2009ImageNet}. It contains 1000 object categories and more than 1.2
+million images. Each category roughly has more than 1000
+images. We randomly pick 50, 100, 500, and 1000 classes
+from all 1000 classes, and construct four different datasets.
+
+We use the activations from a deep neural network as the image features. The network is trained using a similar architecture as the Krizhevsky \emph{et al.}\cite{Krizhevsky2012ImageNet}. We extract the 4096 dimensional activations from the last hidden layer as our image feature and normalize them to have unit norm. Then we apply the Iterative Quantization (ITQ) method~\cite{Gong2013Iterative} to quantize the features into 256-bit binary codes. These binary codes are the input of all the algorithms studied below.
+\subsection{Clustering Accuracy}
+We first evaluate the clustering performance using purity on various datasets, and the results are shown in Figure~\ref{fig:1}. We can find k-means always performs the best, as most other methods are approximating it or introduce certain constrainss. The Bk-means method is usually slightly (1-2\%) worse than k-means. KDk-means works well for small number of centers, while its performance becomes worse when the dataset size and number of centers become large. Overall, Bk-means is still better than KDk-means,and we will show later that it is also faster. k-medoids works reasonably well, but is always worse than Bk-means.This is probably because Bk-means is not restricted to using data points as centers and allows more degrees of freedom.Some sample image clusters on ILSVRC are shown in Figure~\ref{fig:2}.
+\begin{figure*}
+\centering
+\includegraphics{2}
+\caption{Comparison of clustering purity on subsets of ILSVRC2012 dataset. Each subset contains different number of classes.}
+\label{fig:1}
+\end{figure*}
+
+\begin{figure}
+\centering
+\includegraphics{3}
+\caption{Sample clusters from the ILSVRC2012 dataset. Each line shows images in one cluster.}
+\label{fig:2}
+\end{figure}
+
+
+\subsection{Clustering Speed}
+report the running time for different clustering methods
+on different dataset sizes in Table 2. All methods
+have achieved a faster speed than k-means. Overall, Bkmeans
+and k-medoids are fastest and are slightly faster than
+KDk-means. In particular, Bk-means method has achieved
+a significant speedup over k-means. For relatively small
+datasets, such as those with 50 classes and 50 clusters
+Bk-means achieved comparable speed to k-means. This
+is mainly because the number of centers is small, which
+limits the speedup factor of hashing. When we use more
+centers, the speedup becomes more significant. For example,
+with 1000 classes and 10,000 centers, we are able to
+achieve about 60-70 times speedup. We have also tested kmeans
+and bk-measuring 20M images and 1M centers, and
+bk-means can achieve over 400 times speedup than k-means.
+\section{Online Clustering of Large Photo Streams}
+In this section, we introduce an online clustering algorithm
+that performs clustering on large photo stream. This
+has real world applications since photos are always uploaded
+as a stream. Our work is similar to previous works
+on online k-means clustering, but the main difference is we
+do not know the number of clusters and the number of clusters
+will continue to increase.
+
+We describe the online clustering algorithm in Algorithm
+2. The algorithm works as follows. We have an online
+photo stream coming in every second, and we use a fixed
+size Least Recently Used (LRU) cache to store the data.
+When the size of the cache grows to n, we run our Bkmeans
+clustering method on this batch of data and cluster
+them into n/10 centers. Then we filter out images that
+are not visually consistent in each cluster. For every point
+in each cluster, we filter out images that having distance r
+away from its center. After filtering, all the clusters smaller
+than size t will be removed. In the meantime of clustering,
+the LRU cache collects another set of data, and when the
+clustering is done, we perform clustering to the new batch.
+For this new batch, we first assign its points to all the existing
+clusters when they are within r Hamming distance to
+the cluster centers. Then we run Bk-means to the rest and
+repeat the above steps. In the following experiments, we
+will set n = 1000000, t = 10, and r depends on particular
+application. This online clustering setting makes the need
+of compact cluster centers a even more desirable property,
+as the number of centers will grow significantly after running
+it for years. It enables us to process large online photo
+streams, and we will show two applications for it. Clustering
+1 million images into 100,000 clusters usually only
+takes 4 minutes. This system enables us to cluster about
+360 million photos in a day on a single machine
+{\small
+\bibliographystyle{ieee}
+\bibliography{3}
+}
+
+\end{document}
