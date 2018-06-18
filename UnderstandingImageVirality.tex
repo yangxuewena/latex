@@ -1,0 +1,155 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+June 18 2018}
+
+\title{Understanding Image Virality}
+\begin{document}
+\maketitle
+\begin{abstract}
+Virality of online content on social networking websites
+is an important but esoteric phenomenon often studied in
+fields like marketing, psychology and data mining. In this
+paper we study viral images from a computer vision perspective.
+We introduce three new image datasets from Reddit1
+and define a virality score using Reddit metadata. We
+train classifiers with state-of-the-art image features to predict
+virality of individual images, relative virality in pairs
+of images, and the dominant topic of a viral image. We also
+compare machine performance to human performance on
+these tasks. We find that computers perform poorly with low
+level features, and high level information is critical for predicting
+virality. We encode semantic information through
+relative attributes. We identify the 5 key visual attributes
+that correlate with virality. We create an attribute-based
+characterization of images that can predict relative virality
+with 68:10\% accuracy (SVM+Deep Relative Attributes)
+¨Cbetter than humans at 60:12\%. Finally, we study how human
+prediction of image virality varies with different ¡°contexts¡±
+in which the images are viewed, such as the influence
+of neighbouring images, images recently viewed, as well as
+the image title or caption. This work is a first step in understanding
+the complex but important phenomenon of image
+virality. Our datasets and annotations will be made publicly
+available.
+\end{abstract}
+\section{Introduction}
+What graphic should I use to make a new startup more
+eye-catching than Instagram? Which image caption will
+help spread an under-represented shocking news? Should
+I put an image of a cat in my YouTube video if I want millions
+of views? These questions plague professionals and
+regular internet users on a daily basis. Impact of advertisements,
+marketing strategies, political campaigns, non-profit
+organizations, social causes, authors and photographers, to
+name a few, hinges on their ability to reach and be noticed by a large number of people. Understanding what makes
+content viral has thus been studied extensively by marketing
+researchers\cite{Berger2011What}.
+
+Many factors such as the time of day and day of week
+when the image was uploaded, the title used with the image,
+etc. affect whether an image goes viral or not. To
+what extent is virality dependent on these external factors,
+and how much of the virality depends on the image content
+itself? How well can state-of-the-art computer vision
+image features and humans predict virality? Which visual
+attributes correlate with image virality?
+
+In this paper, we address these questions. We introduce
+three image databases collected from Reddit and a virality
+score. Our work identifies several interesting directions for
+deeper investigation where computer vision techniques can
+be brought to bear on this complex problem of understanding
+and predicting image virality.
+\section{Related Work}
+Most existing works\cite{barabasi2005the} study how people share
+content on social networking sites after it has been posted.
+They use the network dynamics soon after the content has
+been posted to detect an oncoming snowballing effect and
+predict whether the content will go viral or not. We argue
+that predicting virality after the content has already been
+posted is too late in some applications. It is not feasible for graphics designers to ¡°try out¡± various designs to see if
+they become viral or not. In this paper, we are interested in
+understanding the relations between the content itself (even
+before it is posted online) and its potential to be viral.
+
+There exist several qualitative theories of the kinds of
+content that are likely to go viral\cite{berger2011arousal}. Only a few
+works have quantitatively analyzed content, for instance
+Tweets and New York Times articles\cite{berger2012what} to predict their
+virality. However, in spite of them being a large part of our
+online experience, the connections between content in visual
+media and their virality has not been analyzed. This
+forms the focus of our work.
+
+Virality of text data such as Tweets has been studied in\cite{Nagarajan2010A}. The diffusion properties were found to be dependent
+on their content and features like embedded URL¡¯s
+and hashtags. Generally, diffusion of content over networks
+has been studied more than the causes. The work of
+Leskovec \emph{et al.} models propagation of recommendations
+over a network of individuals through a stochastic
+model, while Beutel \emph{et al.} approach viral diffusion as
+an epidemiological problem.
+\begin{figure}
+\centering
+\includegraphics[width=8cm,height=5cm]{1}
+\caption{Examples of temporal contextual priming through blurring
+in viral images. Looking at the images on the left in both (a)
+and (b), what do you think the actual images depict? Did your
+expectations of the images turn out to be accurate?}
+\label{fig:1}
+\end{figure}
+\section{Understanding Image Virality}
+Consider the viral images of Figure~\ref{fig:1}, where face swapping, contextual priming, and scene gist make
+the images quite different from what we might expect at
+a first glance. An analogous scenario researched in NLP
+is understanding the semantics of ¡°That¡¯s what she said!¡±
+jokes. We hypothesize that perhaps images that do not
+present such a visual challenge or contradiction ¨C where semantic
+perception of an image does not change significantly
+on closer examination of the image ¨C are ¡°boring¡± \cite{berger2012what}
+and less likely to be viral. This contradiction need not stem
+from the objects or attributes within the image, but may also
+rise from the context of the image: be it the images surrounding
+an image, or the images viewed before the image,
+or the title of the image, and so on. Perhaps an interplay
+between these different contexts and resultant inconsistent
+interpretations of the image is necessary to simulate a visual
+double entendre leading to image virality. With this in
+mind, we define four forms of context that we will study to
+explore image virality.(1)Intrinsic context: This refers to visual content that is
+intrinsic to the pixels of the image.(2) Vicinity context: This refers to the visual content of
+images surrounding the image (spatial vicinity).(3) Temporal context: This refers to the visual content of
+images seen before the image (temporal vicinity).(4) Textual context: This non-visual context refers to the
+title or caption of the image. These titles can sometimes
+manifest themselves as visual content (e.g. if it
+is photoshopped). A word graffiti has both textual and
+intrinsic context, and will require NLP and Computer
+Vision for understanding.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+\end{document}
