@@ -1,0 +1,229 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+June 4 2018}
+
+\title{Continuous Visibility Feature}
+\begin{document}
+\maketitle
+\begin{abstract}
+In this work, we propose a new type of visibility measurement
+named Continuous Visibility Feature (CVF). We
+say that a point q on the mesh is continuously visible from
+another point p if there exists a geodesic path connecting p
+and q that is entirely visible by p. In order to efficiently estimate
+the continuous visibility for all the vertices in a model,
+we propose two approaches that use specific CVF properties
+to avoid exhaustive visibility tests. CVF is then measured
+as the area of the continuously visible region. With this
+stronger visibility measure, we show that CVF better encodes
+the surface and part information of mesh than the tradition
+line-of-sight based visibility. For example, we show
+that existing segmentation algorithms can generate better
+segmentation results using CVF and its variants than using
+other visibility-based shape descriptors, such as shape
+diameter function. Similar to visibility and other mesh surface
+features, continuous visibility would have many applications.
+\end{abstract}
+\section{Introduction}
+Feature extraction often serves as a fundamental engineering
+task for higher level applications. For example, almost
+all of the recognition tasks start with defining or learning
+features. This is particularly true for two-dimensional
+image that has a simple and uniform grid structure and pixels
+can be indexed by a 2D vector in a continuous coordinate
+system. Each pixel has fixed number (usually 4 or 8) of
+neighbors. Thus most of the image features are defined by
+the convolution operations of the local areas. Consequently,
+there are some default features like SIFT\cite{Lowe2004Distinctive} and HOG\cite{Dalal2005Histograms}
+used widely in computer vision research.
+Unlike images, 3D models are usually modeled in the
+continuous domain which makes defining 3D features challenging.
+Consequently, many of the features defined for 3D
+models usually are designed for specific types of shapes.
+For example, visibility among points inside a given
+shape has been used directly or indirectly as shape features,in particular for the task of semantic shape segmentation.
+The intuition behind most of these visibility-based features
+is from the observation that two points sampled from the
+same semantic part tend to be visible from each other. For
+example, shape diameter function (SDF) is a descriptor
+to describe the thickness of a mesh defined via local visibility.
+The idea is initially proposed for shape segmentation
+based on the assumption that a visually meaningful component
+should have similar thickness everywhere. However,
+this assumption does not hold in many cases. For example,
+for a long component, such as a leg, the thickness at one
+end of the component may have different thickness from the
+other end. Another example is a flat component or a component
+whose size grows gradually in a certain direction.
+We believe that the traditional line-of-sight visibility
+used in all existing visibility-based shape features is insufficient.
+In this paper, we will describe a new feature named
+continuous visibility feature. The feature provides stronger
+visibility measure by considering the continuously visible
+region for a vertex or facet. Thus this feature is defined in a
+per-vertex manner. We say that a q is continuously visible
+by a point p if there exists a geodesic path connecting p and
+q that is entirely visible by p. CVF of p is defined as the
+area of a set of continuously visible points by p. A more
+precise definition of CVF can be found in Sections 3. We
+show that CVF better encodes the surface and part information
+of mesh than SDF does. Figure~\ref{fig:1} illustrates some
+example models color mapped by CVF and SDF values. We
+also show that existing segmentation algorithms can generate
+better segmentation results using CVF than using other
+shape descriptors, such as shape diameter function\cite{Shapira2008Consistent}. We
+will demonstrate the segmentation results using the Princeton
+Segmentation Benchmark and applications of CVF and
+its variants (namely CVFavg, strong CVF and weak CVF)
+beyond segmentation.
+A major technical challenge of computing CVF is the
+computational efficiency because it is known the determining
+the visibility of two points is expensive and determining
+their continuous visibility will require many more pairwise
+visibility checks.We will present two ways
+to compute CVF efficiently. The first approach will use the
+continuous property of CVF to construct the continuously visible region in a Breadth-First-Search manner. The second
+approach further improves the efficiency by first collecting
+the potential continuous visible region and then using
+visibility test to search the true boundaries of the continuous
+visible region. We find that the second approach
+provides significant speedup over the first approach.
+\begin{figure*}
+\centering
+\includegraphics{1}
+\caption{Examples of SDF and CVF on the same models. Red and blue indicate the largest and smallest SDF and CVF values, respectively.
+From these examples, we can see that CVF provides a better metric to distinguish visually different parts of a model. More extensive
+comparison can be found}
+\label{fig:1}
+\end{figure*}
+
+\section{Related Work}
+Extracting shape features from 3D model is a fundamental
+operation in shape segmentation, matching, retrieval and
+even deformation. These features can be roughly classified
+into per-vertex/facet features and global signatures. However,
+we should point out that some global signatures are
+also generated from per-vertex/facet features via statistical
+approaches. Osada\emph{et al.} introduced Shape Distributions
+to capture the statistical information of vertices¡¯ and
+facets¡¯ shape function values. Shape matching is achieved
+by measuring the similarity between two shapes¡¯ distribution.
+Even though the feature function is simple,
+it paves the way for many research works in shape
+matching, shape retrieval and other shape analysis tasks.
+Features can be further classified into several categories
+depending on whether they are invariant to translation,
+scaling, and deformation. Some features are designed to
+be invariant to rigid transformation, e.g., spin image
+and shape context. Invariance to deformation has attracted
+more attention. For example, geodesic distance is
+used to build deformation invariance features in a multidimensional
+scaling based approach and spectral domain
+analysis. The idea of heat diffusion process has
+triggered the emergence of diffusion geometry. These
+features are usually using Laplaca-Beltrami operator, e.g.,
+heat kernel signature, global point signature and
+multi-solution spectral descriptor.
+Most of the aforementioned features are designed for
+shape matching, retrieval and correspondence. In shape
+segmentation, researchers have developed other types of features. These features directly control the quality of
+the final segmentation results for the approaches based on
+k-means clustering\cite{Shlafman2002Metamorphosis}, fuzzy clustering, Gaussianmixture
+model followed by graph cut\cite{Shapira2008Consistent}. Some other recent
+work on segmentation which acquires better result also
+needs some feature definition. Liu~\emph{et al.} used
+concavity as features. Kalogerakis~\emph{et al.} and Huang proposed the learning-based segmentation using a rich
+collection of the features.
+
+Visibility-based Features. Several recent works use visibility
+to derive part-aware features. The intuition behind
+most of these visibility-based features is that two points in
+the a visually or functionally meaningful part (such as the
+leg of a table) tend to be visible from each other. For example,
+Shape Diameter Function (SDF)\cite{Shapira2008Consistent} captures the
+thickness of a shape locally among visible points. SDF is
+determined by sampling rays inside the cone in the antinormal
+direction of a facet. The SDF value is the sum of
+the projected length of the rays inside the model. However,
+SDF may not correspond well to a visually meaningful component
+if the thickness is not evenly distributed. For example,
+as shown in Figure~\ref{fig:1}, the tabletop has quite different
+feature values at its center from those on the boundary. In
+addition, the feature values at the ends of the leg are also
+quite different from those closer to the tabletop.
+Another visibility-based feature is Volumetric Shape Image
+(VSI). With the motivation of capturing the general
+volumetric context instead of only getting the local volumetric
+context of the local cone used for sampling rays,
+VSI tries to sample rays in more directions. The VSI feature
+is computed by first finding the proxy center for each
+vertex and then sampling ray at fixed direction. The field
+of VSI is achieved by comparing the difference between the
+sampling of a source vertex and other vertices on the mesh.
+Recently, weak convex decomposition proposed 
+also uses lines-of-sights. It first computes the pairwise visibility
+between all pairs of the vertices/facets on the mesh.
+Then the similarity matrix is constructed with each entry¡¯s value to be 0 or 1 indicating the pairwise invisibility or
+visibility, followed by spectral clustering. Even though
+the mathematical background seems to be quite straightforward
+by referring to the similar issues in machine learning
+problem, the decomposition sometimes is not satisfying
+especially when a mesh model has a large area of bended
+parts. van Kaick~\emph{et al.} used the technique as preprocessing
+step to over-segment the mesh, but it also needs
+a lot of post-merging.
+In all of these features\cite{Shapira2008Consistent}, traditional lineof-
+sight visibility is used. However, from the Figure~\ref{fig:2}, we
+could see that the continuous visibility makes more sense
+than the general visibility in terms of charactering a potential
+component.
+\begin{figure}
+\centering
+\includegraphics{2}
+\caption{(a) Example of 2D continuous visibility. The vertex r
+is continuously visible from the vertex p but the vertex q is not.
+(b) While p is continuously visible from q, q is not continuously
+visible from p.}
+\label{fig:2}
+\end{figure}
+\section{Definitions and Properties of CVF}
+Visibility among the points inside a given shape has been
+used directly or indirectly as shape features in the past. The
+intuition behind most of these visibility-based features is
+from the observation that two points sampled from the same
+(visual or functional) part tend to be visible from each other.
+It usually remains true if we state the property the other
+way around: two points that are visible from each other are
+likely to be from the same part. However, there are many
+exceptions. For example, in a human model in a standing
+pose, a point from the head may see a point in the heel and in
+most cases we would distinguish head and heel as different
+parts of the model.
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+\end{document}
