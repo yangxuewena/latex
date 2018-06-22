@@ -1,0 +1,63 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+June 22 2018}
+
+\title{Classifier Adaptation at Prediction Time}
+\begin{document}
+\maketitle
+\begin{abstract}
+Classifiers for object categorization are usually evaluated by their accuracy on a set of i.i.d. test examples. This provides us with an estimate of the expected error when applying the classifiers to a single new image. In real application,however, classifiers are rarely only used for a single
+image and then discarded. Instead, they are applied sequentially to many images, and these are typically not i.i.d. samples from a fixed data distribution, but they carry dependencies and their class distribution varies over time.
+
+In this work,the author argue that the phenomenon of correlated data at prediction time is not a nuisance, but a blessing in disguise.They describe a probabilistic method for adapting classifiers at prediction time without having to retrain them.They also introduce a framework for creating realistically distributed image sequences, which offers a way to benchmark classifier adaptation methods. Experiments on the ILSVRC2010 and ILSVRC2012 datasets show that adapting object classification systems at prediction time can significantly reduce their error rate, even with no additional human feedback.
+\end{abstract}
+\section{Classifier Adaptation at Prediction Time}
+This paper formally introduce the problem setting and describe a simple yet effective method to adapt pre-trained classifiers to a new distribution.
+\subsection{Notation}
+The author work in a multi-class classification setting, where the goal is to assign outputs.In contrast to the classical domain adaptation setting,They assume that a pre-trained multiclass classifier is available, which is probabilistic, i.e.
+
+They are interested in improving the accuracy at prediction time by adapting the predicted class scores, not in changing the training procedure. This setting has the advantage that it is applicable to classifiers of arbitrary parametric form, including e.g., convolutional networks\cite{Bengio2009Learning}, random forests\cite{Criminisi2012Decision}or one-versus-rest support vector machines\cite{Lampert2009Kernel} with Platt scaling. It is sufficient that the functions fy are available in executable form, and we also do not need access to the original training set. This is important for real world application,where the training set could be too large to keep around for prediction time, or might be commercially valuable and not available to customers.
+\subsection{Classifier adaptation}
+In this section the author introduce thire first contribution, a technique for on the fly classifier adaptation. First, they assume that the distribution at prediction time is fixed but differs from the distribution at training time by a change in class proportions.The objects themselves,however, do not change their visual appearance,i.e.If $\Pi$ were known they could immediately derive an optimal adaptation rule in closed form, see\cite{saerens2002adjusting} for a detailed derivation.
+\subsection{On the fly estimation of the class proportions}
+In practice, the class proportions, $\Pi$, are unknown, so we cannot simply compute the class-prior adaptation and predict optimally. Instead, at any time t = 1,2,... we form an estimate of the class proportions, $\Pi^t$, using the available data, and define the correspondingly adapted classifier.
+\section{A Benchmark for Classifier Adaptation}
+In existing image categorization benchmarks the training and test sets have independent samples with identical data distributions. Since this i.i.d. condition is typically not fulfilled when one just collects images, e.g. from the Internet,it is enforced artificially. For example, for the ImageNet challenges, training and test sets are created by randomly selecting a prescribed number of images for each class from a larger annotated corpus\cite{russakovsky2015imagenet}.
+\subsection{Generating Realistic Image Sequences}
+The main idea for re-introducing dependencies into the test data is to change the sampling process by which the test sets are created. Instead of sampling a fixed number of images independently for each class,the author create sequences of dependent samples using a two-stage latent variable construction:1) we create sequences of class labels, using one of three techniques described below, 2) for each class label in the sequence, we sample one example image of the respective class out of the image corpus.
+\begin{figure*}
+\centering
+\includegraphics[width=15cm,height=5cm]{1}
+\caption{Excerpts of the MDS (left) and KS (right) graphs for the ILSVRC2010 classes with WordNet distance (not all edges are drawn).}
+\label{fig:1}
+\end{figure*}
+
+The first method, MDS, relies on (metric) multidimensional scaling. It assigns a 2D coordinate tuple to each class such that all pairwise distances are preserved as well as possible. The result is a highly heterogeneous class graph in which groups of similar classes form dense clusters, and large gaps occur between group of classes that are pairwise dissimilar, see Figure~\ref{fig:1}(left).
+
+The KS method is based on kernelized sorting\cite{Quadrianto2010Kernelized}. It arranges the classes on a 2D grid based on their pairwise distance to each other. Neighboring classes in the grid are usually semantically similar, but all neighbors have the same distances, so there are no clusters or gaps, see Figure~\ref{fig:1}(right).
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+\end{document}
