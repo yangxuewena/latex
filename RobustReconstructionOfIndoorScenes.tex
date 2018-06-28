@@ -1,0 +1,51 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+June 4 2018}
+
+\title{Web Scale Photo Hash Clustering on A Single Machine}
+\begin{document}
+\maketitle
+\begin{abstract}
+In this paper the author present an approach to indoor scene reconstruction from RGB-D video. The key idea is to combine geometric registration of scene fragments with robust global optimization based on line processes. Geometric registration is error-prone due to sensor noise, which leads to aliasing of geometric detail and inability to disambiguate different surfaces in the scene. The presented optimization approach disables erroneous geometric alignments even when they significantly outnumber correct ones. Experimental results demonstrate that the presented approach substantially increases the accuracy of reconstructed scene models.
+\end{abstract}
+\section{Introduction}
+Prior work on scene reconstruction with consumer depth cameras recognized the importance of global registration\cite{Henry2014RGB}\cite{Endres20173}. Nevertheless, no prior system appears to be sufficiently reliable to support automatic reconstruction of complete indoor scenes at a quality level appropriate for particularly demanding applications. This is evidenced by the recent effort of Xiao~\emph{et al.} to reconstruct a large number of indoor scenes. Due to the unreliability of automatic scene reconstruction pipelines, the authors resorted to manual labeling to establish correspondences between different views.
+\begin{figure*}
+\centering
+\includegraphics[width=15cm,height=6cm]{1}
+\caption{A complete apartment reconstructed by the presented approach. The estimated camera trajectory is 151.6 meters long, folded into a diameter of 8.3 meters.}
+\label{fig:1}
+\end{figure*}
+In this work,the author present a fully automatic scene reconstruction pipeline that matches the reconstruction quality obtained with manual assistance by Xiao ~\emph{et al.} and significantly exceeds the accuracy of prior automatic approaches to indoor reconstruction.An example reconstruction produced by this approach is shown in Figure~\ref{fig:1}.Their approach resolves inconsistencies and identifies correct alignments using global optimization based on line processes.Line processes are closely related to robust estimation \cite{Black1996On}.The advantage of the line process formulation is that the optimization objective retains a least-squares form and can be optimized by a standard high-performance least-squares solver.The author show that this framework is extremely effective in dealing with pairwise registration errors.Their implementation automatically prunes false pairwise alignments even when they significantly outnumber correct ones. Extensive experiments demonstrate that their approach substantially increases reconstruction accuracy.
+
+Their work contains a number of supporting contributions of independent interest. First, they provide infrastructure for rigorous evaluation of scene reconstruction accuracy, augmenting the ICL-NUIM dataset\cite{Handa2014A} with challenging camera trajectories and a realistic noise model. Second, we perform a thorough quantitative evaluation of surface registration algorithms in the context of scene reconstruction; our results indicate that well-known algorithms perform surprisingly poorly and that algorithms introduced in the last few years are outperformed by older approaches. Third, in addition to accuracy measurements on synthetic scenes we describe an experimental procedure for quantitative evaluation of reconstruction quality on real-world scenes in the absence of ground-truth data.
+\section{Conclusion}
+the author presented an approach to scene reconstruction from RGB-D video. The key idea is to combine geometric registration with global optimization based on line processes.The optimization makes the pipeline robust to erroneous geometric alignments, which are unavoidable due to aliasing in the input. Experimental results demonstrate that the presented approach significantly improves the fidelity of indoor scene models produced from consumer-grade video.The presented pipeline is not foolproof. First, if the input video does not contain loop closures that indicate global geometric relations, odometry drift can accumulate and distort the reconstructed model. Real-time feedback that guides the operator to close loops would help. 
+
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+\end{document}
