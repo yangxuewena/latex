@@ -1,0 +1,73 @@
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+\usepackage{cvpr}
+\usepackage{times}
+\usepackage{epsfig}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{times}
+
+
+\cvprfinalcopy % *** Uncomment this line for the final submission
+\def\cvprPaperID{****} % *** Enter the CVPR Paper ID here
+\def\httilde{\mbox{\tt\raisebox{-.5ex}{\symbol{126}}}}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\usepackage{cite}
+\usepackage[colorlinks,linkcolor=red,anchorcolor=blue,citecolor=green,backref=page]{hyperref}
+
+\author{Xuewen Yang\\\\
+June 30 2018}
+
+\title{Hardware Compliant Approximate Image Codes}
+\begin{document}
+\maketitle
+\begin{abstract}
+In recent years, several feature encoding schemes for the bags-of-visual-words model have been proposed. While most of these schemes produce impressive results, they all share an important limitation: their high computational complexity makes it challenging to use them for large-scale problems. In this work,The author propose an approximate locality-constrained encoding scheme that offers significantly better computational efficiency($40\times$) than its exact counterpart, with comparable classification accuracy.Using the perturbation analysis of least-squares problems,the author present a formal approximation error analysis of our approach,which helps distill the intuition behind the robustness of the method.They present a thorough set of empirical analyses on multiple standard data-sets, to assess the capability of the encoding scheme for its representational as well as discriminative accuracy.
+\end{abstract}
+\section{Introduction}
+Image classification frameworks generally consist of (a) extracting local features.(b) transforming them into more informative codes, and (c) using these codes for classification. Over the years, several different image encoding techniques have been proposed\cite{Wang2010Locality}\cite{Gemert2008Kernel}\cite{Wang2010Locality}\cite{Perronnin2010Improving}. As reported in\cite{Chatfield2011The}, given all things equal, most of these encoding schemes tend to produce impressive yet comparable classification accuracies. At the same time however, they can be computationally expensive\cite{Chatfield2011The}. Particularly during the testing phase, their complexity can be a significant proportion of image classification pipeline (see Table~\ref{tab:1}. This limitation often makes it challenging to use these encoding schemes for large-scale learning problems.
+\begin{table}[bp]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+      &Extract &Assign  &Encode &Pool &Test\\
+\hline
+\% Times &6.77\% &37.76\% &42.50\% &7.01\% &5.93\% \\
+\hline
+\end{tabular}
+\caption{\%-times taken by different steps during testing for LLC\cite{Wang2010Locality}. Here D = 128, M = 1024, and K = 10}
+\label{tab:1}
+\end{table}
+\section{Conclusions and Future Work}
+In this work, the author propose an approximate locality-constrained\cite{Wang2010Locality} encoding scheme which offers significantly
+better efficiency than its exact counterpart, with comparable
+classification accuracy.
+
+The key insight is that for locality-constrained encodings,
+the set of bases used to encode a point x, can be used
+equally effectively to encode a group of points similar to x.
+This observation enables us to approximately encode similar
+groups of points simultaneously by using shared sets of
+bases, as opposed to exactly encoding points individually
+each using their own bases (see Figure~\ref{fig:1}).
+\begin{figure}
+\centering
+\includegraphics[width=8cm,height=5cm]{1}
+\caption{(Left) Locality-constrained encoding\cite{Wang2010Locality} finds
+different sets of bases nearest to each feature to exactly construct
+its locally-constrained codes. (Right) In contrast, we
+approximately encode clusters of points simultaneously by
+using shared sets of bases nearest to the cluster-centroid.}
+\label{fig:1}
+\end{figure}
+
+{\small
+\bibliographystyle{ieee}
+\bibliography{1}
+}
+
+\end{document}
